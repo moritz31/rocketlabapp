@@ -16,9 +16,11 @@ class MainActivity : AppCompatActivity() {
         val launches = listOf(launch1,launch2);
         print(launches);
 
-        val adapter = LaunchViewAdapter(this, launches)
+        val adapter = LaunchViewAdapter(this, launches,false);
 
         container?.adapter = adapter;
         adapter?.notifyDataSetChanged()
+
+
     }
 }

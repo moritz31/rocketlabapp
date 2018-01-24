@@ -20,7 +20,7 @@ import java.util.*
  * Created by moritz on 23.01.18.
  */
 
-class LaunchViewAdapter(private var activity: Activity, private var items: List<LaunchData>): BaseAdapter() {
+class LaunchViewAdapter(private var activity: Activity, private var items: List<LaunchData>, private var showUTC : Boolean): BaseAdapter() {
 
     private class ViewHolder(row: View?) {
         var missionName: TextView? = null
@@ -51,13 +51,13 @@ class LaunchViewAdapter(private var activity: Activity, private var items: List<
         viewHolder.missionName?.text = launch.name
 
         val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy HH:mm")
-        Log.d("SimpleDate",simpleDateFormat.toString())
         simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
-        Log.d("SimpleDate",simpleDateFormat.toString())
         val myDate = simpleDateFormat.parse(launch.datetime)
         val formatter = SimpleDateFormat("dd.MM.yyyy, HH:mm (z)")
+        if(showUTC) {
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"))
+        }
         val formattedDate = formatter.format(myDate)
-        Log.d("SimpleDate",formattedDate.toString())
         viewHolder.missionDate?.text = formattedDate.toString()
         viewHolder.missionLocation?.text = launch.location
 
