@@ -4,6 +4,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import de.darmotek.rocketlabinfo.Adapter.LaunchViewAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import android.support.annotation.NonNull
+import android.support.design.widget.BottomNavigationView
+import de.darmotek.rocketlabinfo.Fragments.MissionFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,9 +22,13 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = LaunchViewAdapter(this, launches,false);
 
-        container?.adapter = adapter;
-        adapter?.notifyDataSetChanged()
+        //container?.adapter = adapter;
+        //adapter?.notifyDataSetChanged()
 
-
+        val fragment1 = MissionFragment()
+        supportFragmentManager
+                .beginTransaction()
+                .add(R.id.root, fragment1, "missions")
+                .commit()
     }
 }
